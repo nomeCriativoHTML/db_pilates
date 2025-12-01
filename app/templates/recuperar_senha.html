@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar Senha - Studio Fitness</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/CSS/logins.css') }}?v={{ time }}">
+    <link rel="icon" href="/static/img/img-tela-login.jpg" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    
+    <main class="login-main">
+        <section class="login-container">
+            <header class="login-header">
+                <div class="logo">
+                    <img src="/static/img/img-tela-login.jpg" alt="img-pilates">
+                </div>
+                <h1>Recuperar Senha</h1>
+                <p>Digite seu email para receber instruções</p>
+            </header>
+
+            <div id="message-container">
+                {% if error %}
+                <div class="alert alert-error">
+                    <i class="fas fa-exclamation-circle"></i>
+                    {{ error }}
+                </div>
+                {% endif %}
+                {% if success %}
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle"></i>
+                    {{ success }}
+                </div>
+                {% endif %}
+            </div>
+
+            <form class="login-form" id="passwordResetForm" method="POST" action="/password/reset/request">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <div class="input-wrapper">
+                        <input type="email" id="email" name="email" placeholder="Digite seu email" required>
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="user_type">Tipo de Usuário</label>
+                    <div class="input-wrapper">
+                        <select id="user_type" name="user_type" required>
+                            <option value="aluno">Aluno</option>
+                            <option value="professor">Professor</option>
+                            <option value="admin">Administrador</option>
+                        </select>
+                        <i class="fas fa-user-tag"></i>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-login">
+                    <i class="fas fa-paper-plane"></i> Enviar Instruções
+                </button>
+
+                <div class="login-links">
+                    <a href="/login/" class="back-login">
+                        <i class="fas fa-arrow-left"></i> Voltar para Login
+                    </a>
+                </div>
+            </form>
+
+            <footer class="login-footer">
+                <p>@ 2025 Studio Fitness. Todos os direitos reservados.</p>
+            </footer>
+        </section>
+    </main>
+
+    <script>
+        document.getElementById('passwordResetForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalText = submitButton.innerHTML;
+            
+            // Mostrar loading
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+            submitButton.disabled = true;
+
+            try {
+                const response = await fetch('/password/reset/request', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                const messageContainer = document.getElementById('message-container');
+                
+                if (response.ok) {
+                    if (result.redirect) {
+                        // Redirecionar para página de inserir token
+                        window.location.href = result.redirect;
+                    } else {
+                        messageContainer.innerHTML = `
+                            <div class="alert alert-success">
+                                <i class="fas fa-check-circle"></i>
+                                ${result.message}
+                            </div>
+                        `;
+                        this.reset();
+                    }
+                } else {
+                    messageContainer.innerHTML = `
+                        <div class="alert alert-error">
+                            <i class="fas fa-exclamation-circle"></i>
+                            ${result.error || 'Erro ao processar solicitação'}
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                document.getElementById('message-container').innerHTML = `
+                    <div class="alert alert-error">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Erro de conexão. Tente novamente.
+                    </div>
+                `;
+            } finally {
+                // Restaurar botão
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

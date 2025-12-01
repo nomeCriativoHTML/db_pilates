@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inserir Token - Studio Fitness</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/CSS/logins.css') }}?v={{ time }}">
+    <link rel="icon" href="/static/img/img-tela-login.jpg" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    
+    <main class="login-main">
+        <section class="login-container">
+            <header class="login-header">
+                <div class="logo">
+                    <img src="/static/img/img-tela-login.jpg" alt="img-pilates">
+                </div>
+                <h1>Verificar Token</h1>
+                <p>Insira o token recebido por email</p>
+            </header>
+
+            <div id="message-container">
+                {% if error %}
+                <div class="alert alert-error">
+                    <i class="fas fa-exclamation-circle"></i>
+                    {{ error }}
+                </div>
+                {% endif %}
+                {% if success %}
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle"></i>
+                    {{ success }}
+                </div>
+                {% endif %}
+            </div>
+
+            <form class="login-form" id="tokenForm" method="POST" action="/password/reset/verify">
+                <input type="hidden" id="email" name="email" value="{{ email }}">
+
+                <div class="form-group">
+                    <label for="token">Token de Verificação</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="token" name="token" placeholder="Cole o token recebido" required>
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <small class="token-help">Token enviado para: <strong>{{ email }}</strong></small>
+                </div>
+
+                <button type="submit" class="btn-login">
+                    <i class="fas fa-check"></i> Verificar Token
+                </button>
+
+                <div class="login-links">
+                    <a href="/password/reset" class="back-login">
+                        <i class="fas fa-arrow-left"></i> Solicitar novo token
+                    </a>
+                    <a href="/login/" class="back-login">
+                        <i class="fas fa-home"></i> Voltar para Login
+                    </a>
+                </div>
+            </form>
+
+            <footer class="login-footer">
+                <p>@ 2025 Studio Fitness. Todos os direitos reservados.</p>
+            </footer>
+        </section>
+    </main>
+
+    <script>
+        document.getElementById('tokenForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalText = submitButton.innerHTML;
+            
+            // Mostrar loading
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verificando...';
+            submitButton.disabled = true;
+
+            try {
+                const response = await fetch('/password/reset/verify', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    // Token válido, redirecionar para página de nova senha
+                    window.location.href = `/password/reset/confirmar?token=${formData.get('token')}&email=${formData.get('email')}`;
+                } else {
+                    document.getElementById('message-container').innerHTML = `
+                        <div class="alert alert-error">
+                            <i class="fas fa-exclamation-circle"></i>
+                            ${result.error || 'Token inválido'}
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                document.getElementById('message-container').innerHTML = `
+                    <div class="alert alert-error">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Erro de conexão. Tente novamente.
+                    </div>
+                `;
+            } finally {
+                // Restaurar botão
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
+            }
+        });
+
+        // Auto-focus no campo do token
+        document.getElementById('token').focus();
+    </script>
+</body>
+</html>

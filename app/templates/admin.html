@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/CSS/admin.css') }}?v={{ time }}">
+    <link rel="icon" href="/static/img/img-tela-login.jpg" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+<body>
+    <main class="dashboard-main">
+
+        <header class="dashboard-header">
+            <button class="abrir-menu" aria-label="Abrir menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h1>Dashboard</h1>
+            <div class="user-avatar">
+                <i class="fas fa-user-tie"></i>
+            </div>
+        </header>
+
+        <section class="welcome-secao">
+            <h2>Bem-vindo, Administrador</h2>
+            <p>Aqui está o resumo do seu sistema</p>
+        </section>
+
+        <section class="stats-section">
+            <article class="stat-card" onclick="carregarAlunos()">
+                <i class="fas fa-user-graduate"></i>
+                <div>
+                    <h3>{{ total_alunos }}</h3>
+                    <p>Total de Alunos</p>
+                </div>
+            </article>
+
+            <article class="stat-card" onclick="carregarProfessores()">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <div>
+                    <h3>{{ total_professores }}</h3>
+                    <p>Professores</p>
+                </div>
+            </article>
+
+            <article class="stat-card" onclick="carregarEstudios()">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <div>
+                    <h3>{{ total_estudios }}</h3>
+                    <p>Estúdios</p>
+                </div>
+            </article>
+
+            <article class="stat-card" onclick="carregarPagamentosAtrasados()">
+                <i class="fas fa-exclamation-triangle"></i>
+                <div>
+                    <h3>{{ pagamentos_atrasados }}</h3>
+                    <p>Pagamentos atrasados</p>
+                </div>
+            </article>
+        </section>
+
+        <section class="secao-alerta">
+            <h2>Alertas</h2>
+            <div class="alert-card">
+                <i class="fas fa-exclamation-circle"></i>
+                <p><strong>Pagamentos Atrasados:</strong> {{ pagamentos_atrasados }} alunos com pagamento em atraso</p>
+            </div>
+        </section>
+
+        <section class="actions-section">
+
+           <a href="/admins/cadastro" style="text-decoration: none;">
+                <article class="action-card">
+                    <i class="fas fa-user"></i>
+                    <span>Cadastrar Usuário</span>
+                </article>
+            </a>
+
+
+
+            <article class="stat-card" onclick="carregarTodasAgendas()">
+    <i class="fas fa-calendar-alt"></i>
+    <div>
+        <h3>{{ total_agendas }}</h3>
+        <p>Agendas</p>
+    </div>
+</article>
+
+
+
+
+
+            <article class="action-card">
+                <i class="fas fa-file-alt"></i>
+                <span>Relatórios</span>
+            </article>
+
+            <article class="action-card">
+                <i class="fas fa-cog"></i>
+                <span>Configurações</span>
+            </article>
+        </section>
+    </main>
+
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal-box">
+            <button class="modal-close" onclick="fecharModal()">×</button>
+            <h2 class="modal-title" id="modalTitulo"></h2>
+            <ul class="modal-list" id="modalConteudo"></ul>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', path='/JS/admin.js') }}?v={{ time }}"></script>
+</body>
+</html>

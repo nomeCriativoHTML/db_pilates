@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Studio Fitness</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/CSS/logins.css') }}?v={{ time }}">
+    <link rel="icon" href="/static/img/img-tela-login.jpg" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+<body>
+    
+    <main class="login-main">
+        <section class="login-container">
+            <header class="login-header">
+                <div class="logo">
+                    <img src="/static/img/img-tela-login.jpg" alt="img-pilates">
+                </div>
+                <h1>Studio Fitness</h1>
+                <p>Faça login para continuar</p>
+            </header>
+
+            <div id="message-container"></div>
+
+            <form class="login-form" id="loginForm" method="POST" action="#">
+
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <div class="input-wrapper">
+                        <input type="email" id="email" name="email" placeholder="Digite seu email" required>
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="password" name="senha" placeholder="Digite sua senha" required>
+                        <i class="fas fa-eye toggle-password"></i>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-login">
+                    <i class="fas fa-sign-in-alt"></i>Entrar
+                </button>
+
+                <a href="/password/reset" class="esqueci-senha">
+                    <i class="fas fa-key"></i> Esqueci a senha
+                </a>
+
+            </form>
+
+        <div class="user-types">
+                <p>Tipos de usuário:</p>
+            <div class="types">
+                <button type="button" id="btnAdmin" class="user-btn">
+                    <i class="fas fa-user-tie"></i>
+                    <span>Admin</span>
+                </button>
+
+                <button type="button" id="btnProfessor" class="user-btn">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <span>Professor</span>
+                </button>
+
+                <button type="button" id="btnAluno" class="user-btn">
+                    <i class="fas fa-user"></i>
+                    <span>Aluno</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="register-section">
+            <p>Ainda não é aluno?</p>
+            <a href="/alunos/cadastrar" class="btn-register">
+                <i class="fas fa-user-plus"></i> Criar conta como Aluno
+            </a>
+        </div>
+
+            <footer class="login-footer">
+                <p>@ 2025 Studio Fitness. Todos os direitos reservados.</p>
+            </footer>
+        </section>
+    </main>
+    <script src="{{ url_for('static', path='/JS/logins.js') }}?v={{ time }}"></script>
+</body>
+</html>

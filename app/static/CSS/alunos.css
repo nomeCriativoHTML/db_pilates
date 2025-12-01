@@ -1,0 +1,588 @@
+:root {
+    --primary-color: #1a73e8; /* azul suave */
+    --secondary-color: #f5f6fa; /* off-white */
+    --text-color: #333333;
+    --light-gray: #f9f9f9;
+    --border-color: #e0e0e0;
+    --icon-gray: #7a7a7a;
+    --active-color: #1a73e8;
+    --confirmed-green: #28a745;
+    --approved-blue: #007bff;
+    --warning-yellow: #ffc107;
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f5 100%);
+    color: var(--text-color);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* --------- CONTAINER GERAL --------- */
+.dashboard-container {
+    max-width: 1000px;
+    margin: 30px auto 70px auto;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* --------- HEADER --------- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    background: #fff;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.profile-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: var(--light-gray);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--icon-gray);
+    font-size: 1.8em;
+    border: 1px solid var(--border-color);
+    transition: all 0.2s ease;
+}
+
+.profile-icon:hover {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+.greeting span {
+    font-size: 0.9em;
+    color: var(--icon-gray);
+}
+.greeting h2 {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+/* --------- BOTÕES --------- */
+.main-actions {
+    padding: 25px;
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    flex: 1;
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 1em;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+}
+
+.btn i {
+    margin-right: 8px;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #155ab6;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+.btn-secondary {
+    background: var(--secondary-color);
+    color: var(--text-color);
+}
+
+.btn-secondary:hover {
+    background: #eaeaea;
+}
+
+/* --------- ALERTA --------- */
+.alert-section {
+    padding: 0 25px;
+}
+
+.alert-warning {
+    display: flex;
+    align-items: flex-start;
+    background: #fff9e6;
+    border: 1px solid #ffe58a;
+    border-radius: 12px;
+    padding: 20px;
+    color: #856404;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 12px rgba(255, 200, 0, 0.15);
+    animation: fadeIn 0.6s ease;
+}
+
+.alert-warning i {
+    font-size: 1.6em;
+    margin-right: 15px;
+    color: var(--warning-yellow);
+}
+
+/* --------- SEÇÕES --------- */
+.section {
+    padding: 25px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.section-header h3 {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.section-header i {
+    color: var(--icon-gray);
+}
+
+/* --------- AGENDA --------- */
+.schedule-list {
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 15px;
+    background: #fff;
+}
+
+.schedule-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-color);
+    transition: background 0.25s ease;
+}
+
+.schedule-item:hover {
+    background: var(--light-gray);
+}
+
+.schedule-item:last-of-type {
+    border-bottom: none;
+}
+
+.tag {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 600;
+}
+
+.tag-confirmed {
+    background: rgba(40, 167, 69, 0.1);
+    color: var(--confirmed-green);
+}
+
+.tag-approved {
+    background: rgba(0, 123, 255, 0.1);
+    color: var(--approved-blue);
+}
+
+/* --------- AULAS DO MÊS --------- */
+.month-stats {
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    background: #fff;
+}
+
+.progress-bar-container {
+    background: var(--light-gray);
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--primary-color);
+    transition: width 1s ease;
+}
+
+/* --------- PRÓXIMO PAGAMENTO --------- */
+.payment-card {
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    background: #fff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.payment-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+
+/* PLANOS */
+.planos-container {
+    display: flex;
+    flex-wrap: wrap;           
+    justify-content: center;    
+    gap: 25px 30px;             /* vertical 25px, horizontal 30px */
+    margin-top: 30px;
+    margin-bottom: 70px;
+}
+
+.plano-card {
+    background: linear-gradient(145deg, #ffffff, #f8f9fc);
+    padding: 25px 20px;
+    border-radius: 16px;
+    width: 220px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e5e5e5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.plano-card h3 {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.plano-card p {
+    font-size: 0.95em;
+    color: var(--text-color);
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+/* Botão interno opcional */
+.plano-card .btn-card {
+    background: var(--primary-color);
+    color: #fff;
+    padding: 10px 0;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.95em;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.plano-card .btn-card:hover {
+    background: #155ab6;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* Hover geral do card */
+.plano-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+    background: #f0f4ff;
+}
+
+
+/* Modal de detalhes da aula */
+.modal-overlay {
+    display: none; /* inicialmente oculto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(3px);
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal2 {
+    background: #fff;
+    width: 450px;
+    max-width: 95%;
+    padding: 30px 25px;
+    border-radius: 18px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    position: relative;
+}
+
+
+/* MODAL */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(3px); /* deixa o fundo com leve desfoque */
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal-content {
+    background: #ffffff;
+    width: 450px;
+    max-width: 95%;
+    padding: 30px 25px;
+    border-radius: 18px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    animation: fadeIn 0.4s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-family: "Poppins", sans-serif;
+}
+
+.modal-content h2 {
+    font-size: 1.6em;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.modal-content p {
+    font-size: 0.95em;
+    color: var(--text-color);
+    line-height: 1.5;
+}
+
+.modal-content p strong {
+    color: var(--primary-color);
+}
+
+.fechar {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--icon-gray);
+    transition: all 0.2s ease;
+}
+
+.fechar:hover {
+    color: var(--primary-color);
+    transform: scale(1.2);
+}
+
+/* Botão de adquirir plano */
+.btn-adquirir {
+    margin-top: 15px;
+    padding: 12px 0;
+    border: none;
+    border-radius: 12px;
+    background: var(--primary-color);
+    color: #fff;
+    font-weight: 600;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.btn-adquirir:hover {
+    background: #155ab6;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+.meu-plano-section {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Centraliza o card na horizontal */
+}
+
+.plano-card {
+    width: 95%;
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+    display: flex;
+    flex-direction: column; /* Coloca os elementos em coluna */
+    gap: 20px;
+}
+
+/* Área com ícone + título do card */
+.plano-header {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* centraliza título */
+    gap: 12px;
+}
+
+.plano-header i {
+    color: #28a745;
+    font-size: 28px;
+}
+
+/* Textos do plano alinhados à esquerda */
+.plano-info {
+    text-align: left;
+}
+
+.plano-info p {
+    margin: 4px 0;
+    font-size: 16px;
+}
+
+/* Botões nas extremidades */
+.plano-acoes {
+    display: flex;
+    justify-content: space-between; /* um botão à esquerda, outro à direita */
+}
+
+.plano-acoes button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 160px;
+}
+
+.btn-detalhes {
+    background-color: #3498db;
+    color: white;
+}
+
+.btn-upgrade {
+    background-color: #27ae60;
+    color: white;
+}
+
+
+/* BLOQUEIO (sem alteração, mas mantém compatível com o layout novo) */
+.locked {
+    position: relative;
+    filter: blur(4px);
+    pointer-events: none;
+    opacity: 0.5;
+}
+.locked::after {
+    content: "\f023";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    color: #ff0000;
+}
+
+
+.plano-upgrade-card {
+    padding: 15px;
+    border-radius: 10px;
+    background: #f3f3f3;
+    margin-bottom: 10px;
+}
+
+
+/* Responsividade */
+@media (max-width: 500px) {
+    .modal-content {
+        width: 100%;
+        padding: 20px;
+        border-radius: 14px;
+    }
+    .modal-content h2 {
+        font-size: 1.4em;
+    }
+    .btn-adquirir {
+        font-size: 0.95em;
+    }
+}
+
+/* --------- BOTTOM NAV --------- */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 65px;
+    border-top: 1px solid var(--border-color);
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.nav-item {
+    text-align: center;
+    color: var(--icon-gray);
+    transition: all 0.25s ease;
+}
+
+.nav-item:hover {
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+.nav-item.active {
+    color: var(--active-color);
+}
+
+/* ANIMAÇÕES */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+    .dashboard-container {
+        border-radius: 0;
+        margin: 0;
+        box-shadow: none;
+    }
+    .main-actions {
+        flex-direction: column;
+    }
+}

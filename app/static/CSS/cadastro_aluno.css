@@ -1,0 +1,171 @@
+:root {
+  --cor-primaria: #111827;
+  --cor-secundaria: #f3f4f6;
+  --cor-destaque: #2c3e50;
+  --cor-borda: #d1d5db;
+  --cor-borda-escura: #9ca3af;
+  --cor-fundo-card: #ffffff;
+}
+
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", "Arial", sans-serif;
+}
+
+body {
+  background: var(--cor-secundaria);
+  color: var(--cor-primaria);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  min-height: 100vh;
+}
+
+/* CONTAINER */
+.cadastro-container {
+  width: 100%;
+  max-width: 650px;
+  background: var(--cor-fundo-card);
+  padding: 2.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.cadastro-container legend{
+    margin-bottom: 1.5rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* HEADER */
+.cadastro-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 14px;
+    color: #7f8c8d;
+}
+
+
+.cadastro-header h1 {
+  font-size: 1.9rem;
+  font-weight: bold;
+  color: var(--cor-primaria);
+}
+
+.cadastro-header p {
+  margin-top: 0.3rem;
+  color: #4b5563;
+}
+/* FORM */
+form fieldset {
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Labels */
+label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+
+/* INPUT GROUP */
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* WRAPPER PARA TODOS */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Inputs e selects */
+.input-wrapper input,
+.input-wrapper select {
+  width: 100%;
+  padding: 0.85rem;
+  padding-right: 40px; /* espaço para ícone */
+  border: 1px solid var(--cor-borda-escura);
+  border-radius: 0.5rem;
+  background: #fff;
+  font-size: 1rem;
+}
+
+/* Foco */
+.input-wrapper input:focus,
+.input-wrapper select:focus {
+  border-color: var(--cor-destaque);
+  box-shadow: 0 0 0 2px rgba(44, 62, 80, 0.25);
+  outline: none;
+}
+
+/* ÍCONES DENTRO DO INPUT */
+.input-icon {
+  position: absolute;
+  right: 12px;
+  color: #6b7280;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+.fa-envelope {
+  pointer-events: none; /* Ícone de email não é clicável */
+}
+
+/* BOTÕES */
+.form-actions {
+  margin-top: 1.8rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.btn {
+  flex: 1;
+  padding: 0.9rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease-in-out;
+}
+
+.btn.cancelar {
+  background: #e5e7eb;
+  color: #374151;
+  border: 1px solid var(--cor-borda-escura);
+}
+
+.btn.salvar {
+  background: var(--cor-destaque);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(44, 62, 80, 0.3);
+}
+
+/* FOOTER */
+.cadastro-footer {
+  text-align: center;
+  margin-top: 1rem;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+  .cadastro-container {
+    padding: 1.5rem;
+  }
+}

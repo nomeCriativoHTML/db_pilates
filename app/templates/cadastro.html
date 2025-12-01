@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='/CSS/cadastro.css') }}?v={{ time }}">
+  <link rel="icon" href="/static/img/img-tela-login.jpg" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+  <header class="topbar">
+    <button class="btn-voltar" aria-label="Voltar">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+    <h1>Cadastro</h1>
+  </header>
+
+  <main>
+    <!-- Menu de Seleção de Categoria -->
+    <section class="categoria-container">
+      <h2>Selecionar Categoria</h2>
+      <div class="categoria-lista">
+        <div class="categoria-item ativo" data-tab="aluno"><i class="fas fa-user-graduate"></i>Aluno</div>
+        <div class="categoria-item" data-tab="professor"><i class="fas fa-chalkboard-teacher"></i>Professor</div>
+        <div class="categoria-item" data-tab="estudio"><i class="fas fa-dumbbell"></i>Estúdio</div>
+        <div class="categoria-item" data-tab="atendimento"><i class="fas fa-user-shield"></i>Atendimento</div>
+        <div class="categoria-item" data-tab="unidades"><i class="fas fa-building"></i>Unidades</div>
+      </div>
+    </section>
+
+    <!-- Formulários -->
+    <section class="form-container">
+
+      <!-- Formulário Aluno -->
+      <form id="form-aluno" class="formulario ativo">
+        <fieldset>
+          <legend>Informações do Aluno</legend>
+
+          <label for="nome">Nome completo</label>
+          <input type="text" id="nome" name="nome" placeholder="Digite o nome do aluno" required>
+
+          <label for="cpf">CPF</label>
+          <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" required>
+
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="email@exemplo.com" required>
+
+          <label for="senha">Senha</label>
+          <input type="password" id="senha" name="senha" placeholder="Digite uma senha" required>
+
+          <label for="telefone">Telefone</label>
+          <input type="tel" id="telefone" name="telefone" placeholder="(11)99999-9999">
+
+          <label for="data_nascimento">Data de Nascimento</label>
+          <input type="date" id="data_nascimento" name="data_nascimento">
+
+          <label for="status_pagamento">Status de pagamento</label>
+          <select id="status_pagamento" name="status_pagamento" required>
+            <option value="pendente" selected>Pendente</option>
+            <option value="pago">Pago</option>
+            <option value="atrasado">Atrasado</option>
+          </select>
+        </fieldset>
+
+        <div class="form-actions">
+          <button type="button" class="btn cancelar">Cancelar</button>
+          <button type="submit" class="btn salvar">Salvar</button>
+        </div>
+      </form>
+
+      <!-- Formulário Professor -->
+      <form id="form-professor" class="formulario">
+        <fieldset>
+          <legend>Informações do Professor</legend>
+
+          <label for="nome-prof">Nome completo</label>
+          <input type="text" id="nome-prof" name="nome" placeholder="Digite o nome do professor" required>
+
+          <label for="cref">CREF</label>
+          <input type="text" id="cref" name="cref" placeholder="Número do CREF" required>
+
+          <label for="email-prof">Email</label>
+          <input type="email" id="email-prof" name="email" placeholder="email@exemplo.com" required>
+
+          <label for="senha-prof">Senha</label>
+          <input type="password" id="senha-prof" name="senha" placeholder="Digite uma senha" required>
+
+          <label for="telefone-prof">Telefone</label>
+          <input type="tel" id="telefone-prof" name="telefone" placeholder="(11)99999-9999">
+
+          <label for="identificador">CPF/RG</label>
+          <input type="text" id="identificador" name="identificador" placeholder="Digite CPF ou RG">
+
+          <label for="tipo_identificador">Tipo de Documento</label>
+          <select id="tipo_identificador" name="tipo_identificador">
+            <option value="">Selecione...</option>
+            <option value="cpf">CPF</option>
+            <option value="rg">RG</option>
+            <option value="outro">Outro</option>
+          </select>
+
+          <label for="estudio_id">Estúdio (Opcional)</label>
+          <select id="estudio_id" name="estudio_id">
+            <option value="">Selecione um estúdio...</option>
+          </select>
+
+          <div class="checkbox-container">
+            <input type="checkbox" id="ativo" name="ativo" checked>
+            <label for="ativo">Professor ativo</label>
+          </div>
+        </fieldset>
+
+        <div class="form-actions">
+          <button type="button" class="btn cancelar">Cancelar</button>
+          <button type="submit" class="btn salvar">Salvar</button>
+        </div>
+      </form>
+
+      <!-- Formulário Estúdio -->
+      <form id="form-estudio" class="formulario">
+        <fieldset>
+          <legend>Informações do Estúdio</legend>
+
+          <label for="nome-estudio">Nome do Estúdio</label>
+          <input type="text" id="nome-estudio" name="nome" placeholder="Digite o nome do estúdio" required>
+
+          <label for="endereco">Endereço</label>
+          <input type="text" id="endereco" name="endereco" placeholder="Rua Exemplo, 123" required>
+
+          <label for="cep">CEP</label>
+          <input type="text" id="cep" name="cep" placeholder="12345-678" pattern="\d{5}-\d{3}" required>
+
+          <label for="telefone-estudio">Telefone</label>
+          <input type="tel" id="telefone-estudio" name="telefone" placeholder="(11)99999-9999">
+
+          <label for="email-estudio">Email</label>
+          <input type="email" id="email-estudio" name="email" placeholder="contato@studiopilates.com">
+
+          <label for="capacidade-maxima">Capacidade Máxima</label>
+          <input type="number" id="capacidade-maxima" name="capacidade_maxima" min="1" value="3">
+        </fieldset>
+
+        <div class="form-actions">
+          <button type="button" class="btn cancelar">Cancelar</button>
+          <button type="submit" class="btn salvar">Salvar</button>
+        </div>
+      </form>
+
+
+      
+      <!-- Formulário Atendimento (Admin) -->
+      <form id="form-atendimento" class="formulario">
+        <fieldset>
+          <legend>Informações do Administrador</legend>
+
+          <label for="nome-admin">Nome completo</label>
+          <input type="text" id="nome-admin" name="nome" placeholder="Digite o nome do admin" required>
+
+          <label for="email-admin">Email</label>
+          <input type="email" id="email-admin" name="email" placeholder="email@exemplo.com" required>
+
+          <label for="senha-admin">Senha</label>
+          <input type="password" id="senha-admin" name="senha" placeholder="Digite uma senha" required>
+
+          <label for="cargo-admin">Cargo</label>
+          <select id="cargo-admin" name="tipo_admin">
+            <option value="admin_pleno">Administrador</option>
+            <option value="recepcionista">Recepcionista</option>
+          </select>
+
+          <label for="status-admin">Status</label>
+          <select id="status-admin" name="ativo">
+            <option value="true">Ativo</option>
+            <option value="false">Inativo</option>
+          </select>
+        </fieldset>
+
+        <div class="form-actions">
+          <button type="button" class="btn cancelar">Cancelar</button>
+          <button type="submit" class="btn salvar">Salvar</button>
+        </div>
+      </form>
+
+
+      <!-- Formulário Unidades -->
+      <form id="form-unidades" class="formulario">
+        <fieldset>
+          <legend>Informações da Unidade</legend>
+
+          <label for="nome-unidade">Nome da Unidade</label>
+          <input type="text" id="nome-unidade" name="nome" placeholder="Digite o nome da unidade" required>
+
+          <label for="localizacao">Localização</label>
+          <input type="text" id="localizacao" name="localizacao" placeholder="Endereço completo" required>
+
+          <label for="telefone-unidade">Telefone</label>
+          <input type="tel" id="telefone-unidade" name="telefone" placeholder="(11)99999-9999" required>
+        </fieldset>
+
+        <div class="form-actions">
+          <button type="button" class="btn cancelar">Cancelar</button>
+          <button type="submit" class="btn salvar">Salvar</button>
+        </div>
+      </form>
+
+    </section>
+  </main>
+   <script src="{{ url_for('static', path='/JS/cadastros.js') }}?v={{ time }}"></script>
+</body>
+</html>
+

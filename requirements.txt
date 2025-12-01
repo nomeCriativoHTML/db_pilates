@@ -1,0 +1,43 @@
+# --- Framework principal ---
+fastapi[standard]
+uvicorn==0.27.1
+
+# --- Banco de dados ---
+sqlalchemy==2.0.29
+alembic==1.13.1
+pymysql==1.1.0
+python-dotenv==1.0.0
+
+# --- Templates e uploads ---
+jinja2==3.1.2
+python-multipart
+# --- Segurança e autenticação ---
+cryptography
+PyJWT==2.8.0
+itsdangerous==2.1.2
+
+# --- Testes e utilitários ---
+pytest==8.2.1
+colorama==0.4.6
+click==8.1.7
+packaging==24.0
+pluggy==1.5.0
+
+# --- Rede e dependências FastAPI ---
+httpx==0.27.0
+httpcore==1.0.5
+anyio==4.2.0
+h11==0.14.0
+sniffio==1.3.0
+typing_extensions==4.9.0
+idna==3.6
+certifi==2024.2.2
+iniconfig==2.0.0
+
+# --- Tipagem e validação ---
+pydantic==2.6.1
+annotated-types==0.6.0
+python-jose[cryptography]
+# caso de erro do pydantic-core, descomentar as linhas abaixo e comentar a linha do pidantic
+# pip install "pydantic-core>=2.41.0" --only-binary=pydantic-core
+# pip install --no-deps -r requirements.txt

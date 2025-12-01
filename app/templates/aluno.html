@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Aluno</title>
+    <link rel="icon" href="/static/img/img-tela-login.jpg" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', path='/CSS/alunos.css') }}?v={{ time }}">
+</head>
+
+<body data-aluno-id="{{ aluno.id }}" data-aluno-plano-id="{{ aluno.plano_id }}" data-aluno-plano-nome="{{ aluno.plano_nome }}">
+
+<div class="dashboard-container">
+    <header class="header">
+        <div class="header-left">
+            <div class="profile-icon">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="greeting">
+                <span>Dashboard</span>
+                <h2>Bem-vindo, {{ aluno.nome }}</h2>
+            </div>
+        </div>
+        <div class="header-right">
+            <i class="far fa-bell"></i>
+        </div>
+    </header>
+
+    <section class="main-actions">
+        <button class="btn btn-primary">
+            <i class="far fa-calendar-check"></i> Agendar Aula
+        </button>
+        <button class="btn btn-secondary">
+            <i class="far fa-calendar-alt"></i> Remarcar Aula
+        </button>
+    </section>
+
+
+    <!-- =======================
+      SEÇÃO: MEU PLANO
+======================= -->
+<section class="meu-plano-section">
+
+    {% if not possui_plano %}
+    <!-- Caso o aluno NÃO tenha plano -->
+    <div class="alert-section">
+        <div class="alert alert-warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            <div class="alert-content">
+                <span class="alert-title">Nenhum Plano Encontrado</span>
+                <p>Você ainda não adquiriu um plano. Selecione um plano para liberar o acesso às aulas.</p>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <!-- Caso o aluno TENHA um plano -->
+<div class="plano-card">
+    <div class="plano-header">
+        <i class="fas fa-check-circle"></i>
+        <h3>Seu Plano Ativo</h3>
+    </div>
+
+    <div class="plano-info">
+        <p><strong>Plano:</strong> {{ plano.periodo }}</p>
+        <p><strong>Status:</strong> Ativo</p>
+        <p><strong>Aluno:</strong> {{ aluno.nome }}</p>
+        <p><strong>Data:</strong> {{ data_atual }}</p>
+    </div>
+
+    <div class="plano-acoes">
+      
+        <button class="btn-detalhes" onclick="abrirDetalhesPlano('{{ plano.id }}')">
+            Ver detalhes
+        </button>
+
+        <button class="btn-upgrade" onclick="abrirModalUpgrade()">
+            Fazer upgrade
+        </button>
+    </div>
+</div>
+
+    {% endif %}
+
+</section>
+
+
+    <!-- Todas as seções bloqueáveis -->
+    <div {% if not possui_plano %}class="locked"{% endif %}>
+        <section class="section">
+            <div class="section-header">
+                <h3>Agenda do Estúdio</h3>
+                <i class="far fa-calendar-alt"></i>
+            </div>
+
+            <div class="schedule-list">
+                
+                {% if aulas_disponiveis %}
+    {% for aula in aulas_disponiveis %}
+    <div class="schedule-item" onclick="abrirModalAula('{{ aula.id }}')">
+
+        <div class="item-details">
+
+            <p id="modalDescricao"></p>
+            <p><strong>Data: {{ aula.data.strftime("%d/%m/%Y") }}</strong> </p>
+            <p><strong>Hora: {{ aula.hora.strftime("%H:%M") }}</strong> </p>
+            <p><strong>Professor: {{ aula.professor.nome if aula.professor.nome else "Não informado" }}</strong> </p>
+            <p><strong>Estúdio: {{ aula.estudio.nome if aula.estudio.nome else "?" }}</strong> </p>
+    
+        </div>
+
+        <span class="tag tag-approved">Disponível</span>
+
+    </div>
+    {% endfor %}
+{% else %}
+    <p class="no-classes">Nenhuma aula disponível no momento.</p>
+{% endif %}
+
+                <button class="btn btn-tertiary">Ver agenda completa</button>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <h3>Aulas do Mês</h3>
+                <i class="fas fa-external-link-alt"></i>
+            </div>
+            <div class="month-stats">
+                <div class="month-header">
+                    <span class="month-name">Janeiro 2025</span>
+                    <span class="month-count">8/12</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="width: 66%;"></div>
+                </div>
+                <div class="stats-boxes">
+                    <div class="stat-box">
+                        <span class="stat-number">8</span>
+                        <span class="stat-label">Realizadas</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">4</span>
+                        <span class="stat-label">Restantes</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <h3>Próximo Pagamento</h3>
+                <i class="far fa-calendar-alt"></i>
+            </div>
+            <div class="payment-card">
+                <div class="payment-details">
+                    <div class="detail-row">
+                        <span class="detail-label">Vencimento</span>
+                        <span class="detail-value">05/02/2025</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Valor</span>
+                        <span class="detail-value value-bold">R$ 150,00</span>
+                    </div>
+                </div>
+                <button class="btn btn-outline">Visualizar boletos</button>
+            </div>
+        </section>
+    </div> <!-- Fim locked -->
+
+<!-- Seção de Planos (somente quando NÃO possui plano) -->
+{% if not possui_plano %}
+<section class="planos-container">
+    <div class="plano-card" onclick="abrirModalPlano(1)">
+        <h3>Plano Básico</h3>
+        <p>Acesso a 1 aula por semana.</p>
+    </div>
+    <div class="plano-card" onclick="abrirModalPlano(2)">
+        <h3>Plano Fitness</h3>
+        <p>Acesso a 2 aulas por semana.</p>
+    </div>
+    <div class="plano-card" onclick="abrirModalPlano(3)">
+        <h3>Plano Premium</h3>
+        <p>Acesso ilimitado às aulas.</p>
+    </div>
+    <div class="plano-card" onclick="abrirModalPlano(4)">
+        <h3>Plano VIP</h3>
+        <p>Acompanhamento personal trainer.</p>
+    </div>
+</section>
+{% endif %}
+
+
+    <!-- Modal -->
+    <div id="modalPlano" class="modal">
+        <div class="modal-content">
+            <span class="fechar" onclick="fecharModalPlano()">&times;</span>
+            <h2 id="modalTitulo"></h2>
+            <p id="modalDescricao"></p>
+            <p><strong>Frequência:</strong> <span id="modalFrequencia"></span></p>
+            <p><strong>Valor Mensal:</strong> R$ <span id="modalValorMensal"></span></p>
+            <p><strong>Valor Total:</strong> R$ <span id="modalValorTotal"></span></p>
+            <p><strong>Política de Cancelamento:</strong> <span id="modalCancelamento"></span></p>
+            <button class="btn-adquirir">Adquirir Plano</button>
+        </div>
+    </div>
+
+    <!-- Modal Upgrade -->
+    <div id="modalUpgrade" class="modal">
+        <div class="modal-content">
+            <span class="fechar" onclick="fecharModalUpgrade()">&times;</span>
+            <h2>Escolha um novo plano</h2>
+
+            <div id="listaPlanosUpgrade"></div>
+        </div>
+    </div>
+
+
+
+<!-- ======================
+     MODAL DETALHES DA AULA
+======================= -->
+<div id="modalAula" class="modal-overlay" style="display: none;">
+    <div class="modal2">
+        <h2 id="modalAulaTitulo">Detalhes da Aula</h2>
+
+        <div id="modalAulaConteudo" class="modal-body">
+            <!-- Detalhes serão inseridos via JS -->
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="fecharModalAula()">Fechar</button>
+            <button class="btn btn-primary" id="btnConfirmarPresenca">Confirmar Presença</button>
+        </div>
+    </div>
+</div>
+
+
+    
+
+    <nav class="bottom-nav">
+        <div class="nav-item active">
+            <i class="fas fa-home"></i>
+            <span>Início</span>
+        </div>
+        <div class="nav-item" onclick="window.location.href='/alunos/agenda'">
+            <i class="far fa-calendar-alt"></i>
+            <span>Agenda</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-chart-line"></i>
+            <span>Evolução</span>
+        </div>
+        <div class="nav-item">
+            <i class="far fa-user"></i>
+            <span>Perfil</span>
+        </div>
+    </nav>
+</div>
+
+<script src="{{ url_for('static', path='/JS/aluno.js') }}?v={{ time }}"></script>
+</body>
+</html>

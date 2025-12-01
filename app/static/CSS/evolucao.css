@@ -1,0 +1,349 @@
+/* Variáveis para padronizar cores */
+:root {
+    --primary-color: #007bff; /* Azul primário para botões e ícones */
+    --text-color: #333;
+    --light-gray: #f8f9fa;
+    --border-color: #e9ecef;
+    --icon-gray: #6c757d;
+    --active-color: #007bff; /* Item ativo azul */
+    --success-green: #28a745;
+    --info-blue: #17a2b8;
+}
+
+/* Reset básico */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: white;
+    color: var(--text-color);
+    line-height: 1.5;
+}
+
+.app-container {
+    max-width: 600px; 
+    margin: 0 auto;
+    background-color: white;
+    min-height: 100vh;
+    padding-bottom: 60px; /* Espaço para o menu inferior */
+}
+
+/* -------------------- Cabeçalho da Página -------------------- */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 1.1em;
+}
+
+.page-header h1 {
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+.page-header i {
+    color: var(--icon-gray);
+}
+
+/* -------------------- Formulário e Componentes -------------------- */
+.evolution-form-section {
+    padding: 15px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.9em;
+    font-weight: 500;
+    color: var(--icon-gray);
+    margin-bottom: 5px;
+}
+
+/* Estilo de Input e Textarea */
+input[type="text"], textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1em;
+    color: var(--text-color);
+    resize: vertical; /* Permite redimensionar verticalmente o textarea */
+}
+
+input[type="text"]::placeholder, textarea::placeholder {
+    color: #ccc;
+    font-style: italic;
+}
+
+/* Input com Ícone (Data da Aula) */
+.input-with-icon {
+    position: relative;
+}
+
+.input-with-icon input {
+    padding-right: 40px; /* Espaço para o ícone */
+}
+
+.input-with-icon i {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    color: var(--icon-gray);
+    pointer-events: none; /* Não interfere no clique do input */
+}
+
+/* Estilo de Select (Dropdown) */
+.select-container {
+    position: relative;
+}
+
+.select-container select {
+    appearance: none; /* Remove estilo padrão do sistema */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1em;
+    background-color: white;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+.select-icon {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    color: var(--icon-gray);
+    pointer-events: none;
+    font-size: 0.8em;
+}
+
+
+/* -------------------- Card do Aluno -------------------- */
+.student-card {
+    padding: 10px 15px;
+    background-color: var(--light-gray);
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.student-info {
+    display: flex;
+    align-items: center;
+}
+
+.student-avatar {
+    font-size: 2.5em;
+    color: var(--icon-gray);
+    margin-right: 15px;
+}
+
+.student-name {
+    font-weight: 600;
+    font-size: 1.1em;
+    display: block;
+}
+
+.student-class {
+    font-size: 0.85em;
+    color: var(--icon-gray);
+}
+
+
+/* -------------------- Prontuário Clínico -------------------- */
+.clinical-section {
+    padding-top: 5px;
+    margin-bottom: 20px;
+}
+
+.clinical-section .section-title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.clinical-section .section-title i {
+    color: var(--primary-color);
+    margin-right: 8px;
+    font-size: 1.1em;
+}
+
+.clinical-section .section-title span {
+    font-weight: 600;
+    font-size: 1em;
+}
+
+
+/* -------------------- Botão Salvar Evolução -------------------- */
+.btn-save {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.btn-save i {
+    margin-right: 8px;
+}
+
+
+/* -------------------- Histórico do Aluno -------------------- */
+.history-section {
+    padding: 15px;
+    border-top: 10px solid var(--light-gray); /* Separador visual */
+}
+
+.history-section .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.history-section .section-header h3 {
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.filter-button {
+    display: flex;
+    align-items: center;
+    color: var(--icon-gray);
+    font-size: 0.9em;
+    cursor: pointer;
+}
+
+.filter-button i {
+    margin-right: 5px;
+}
+
+.history-list {
+    padding-top: 5px;
+}
+
+.history-item {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.history-item:last-child {
+    border-bottom: none;
+}
+
+.item-date, .item-prof {
+    font-size: 0.8em;
+    color: var(--icon-gray);
+    display: inline-block;
+}
+
+.item-date {
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+.item-prof {
+    float: right;
+}
+
+.item-title {
+    font-weight: 500;
+    margin: 5px 0;
+    font-size: 1em;
+}
+
+.item-status {
+    font-size: 0.8em;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px;
+    border-radius: 12px;
+}
+
+.item-status i {
+    margin-right: 4px;
+    font-size: 0.7em;
+}
+
+/* Status Colors */
+.status-blue {
+    background-color: rgba(0, 123, 255, 0.1);
+    color: var(--primary-color);
+}
+
+.status-green {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: var(--success-green);
+}
+
+.status-gray {
+    background-color: var(--light-gray);
+    color: var(--icon-gray);
+}
+
+
+/* -------------------- Barra de Navegação Inferior -------------------- */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 600px; 
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 55px;
+    background-color: white;
+    border-top: 1px solid var(--border-color);
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
+    z-index: 100;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--icon-gray);
+    font-size: 0.7em;
+    padding: 5px;
+    cursor: pointer;
+    flex: 1; /* Distribui o espaço uniformemente */
+}
+
+.nav-item i {
+    font-size: 1.2em;
+    margin-bottom: 2px;
+}
+
+/* Ajuste de cor e ícone para o item ativo (Evolução) */
+.nav-item.active {
+    color: var(--active-color); 
+}
+
+.nav-item.active i {
+    color: var(--active-color);
+}

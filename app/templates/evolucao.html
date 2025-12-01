@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evolução do Aluno</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', path='/CSS/evolucao.css') }}?v={{ time }}">
+</head>
+<body>
+
+    <div class="app-container">
+        <header class="page-header">
+            <i class="fas fa-arrow-left"></i>
+            <h1>Evolução do Aluno</h1>
+            <i class="fas fa-ellipsis-v"></i>
+        </header>
+
+        <main class="evolution-form-section">
+            
+            <div class="form-group">
+                <label for="select-aluno">Selecionar Aluno</label>
+                <div class="select-container">
+                    <select id="select-aluno">
+                        <option>Maria Silva - 14:00</option>
+                        <option>João Santos - 16:00</option>
+                    </select>
+                    <i class="fas fa-chevron-down select-icon"></i>
+                </div>
+            </div>
+
+            <div class="student-card">
+                <div class="student-info">
+                    <i class="fas fa-user-circle student-avatar"></i>
+                    <div>
+                        <span class="student-name">Maria Silva</span>
+                        <span class="student-class">Aula: 22/08/2025 - 14:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="date-aula">Data da Aula</label>
+                <div class="input-with-icon">
+                    <input type="text" id="date-aula" value="23/08/2025">
+                    <i class="far fa-calendar-alt"></i>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="exercicios">Exercícios Realizados</label>
+                <textarea id="exercicios" rows="4" placeholder="Descreva os exercícios realizados durante a aula..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="observacoes">Observações</label>
+                <textarea id="observacoes" rows="3" placeholder="Observações sobre o desempenho do aluno..."></textarea>
+            </div>
+
+            <div class="clinical-section">
+                <div class="section-title">
+                    <i class="fas fa-user-md"></i>
+                    <span>Prontuário Clínico</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="avaliacao">Avaliação Postural</label>
+                    <textarea id="avaliacao" rows="3" placeholder="Descreva a avaliação postural..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="amplitude">Amplitude de Movimento</label>
+                    <textarea id="amplitude" rows="2" placeholder="Registre a amplitude de movimento..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="nivel-dor">Nível de Dor (0-10)</label>
+                    <div class="select-container">
+                        <select id="nivel-dor">
+                            <option>0 - Sem dor</option>
+                            <option>5 - Dor moderada</option>
+                            <option>10 - Dor insuportável</option>
+                        </select>
+                        <i class="fas fa-chevron-down select-icon"></i>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-save">
+                <i class="far fa-save"></i> Salvar Evolução
+            </button>
+        </main>
+
+        <section class="history-section">
+            <div class="section-header">
+                <h3>Histórico do Aluno</h3>
+                <div class="filter-button">
+                    <i class="fas fa-filter"></i>
+                    <span>Filtrar</span>
+                </div>
+            </div>
+
+            <div class="history-list">
+                <div class="history-item">
+                    <span class="item-date">20/08/2025</span>
+                    <span class="item-prof">Prof. Carlos</span>
+                    <p class="item-title">Foco: equilíbrio - exercícios de core e estabilização</p>
+                    <span class="item-status status-blue"><i class="fas fa-star"></i> Boa evolução</span>
+                </div>
+
+                <div class="history-item">
+                    <span class="item-date">15/08/2025</span>
+                    <span class="item-prof">Prof. Carlos</span>
+                    <p class="item-title">Exercícios de fortalecimento lombar</p>
+                    <span class="item-status status-green"><i class="fas fa-check-circle"></i> Progresso constante</span>
+                </div>
+                
+                <div class="history-item">
+                    <span class="item-date">10/08/2025</span>
+                    <span class="item-prof">Prof. Carlos</span>
+                    <p class="item-title">Avaliação inicial - dor lombar moderada</p>
+                    <span class="item-status status-gray"><i class="far fa-circle"></i> Primeira consulta</span>
+                </div>
+            </div>
+        </section>
+
+        <nav class="bottom-nav">
+            <div class="nav-item">
+                <i class="far fa-calendar-alt"></i>
+                <span>Agenda</span>
+            </div>
+            <div class="nav-item active">
+                <i class="fas fa-chart-line"></i>
+                <span>Evolução</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-check-square"></i>
+                <span>Presença</span>
+            </div>
+        </nav>
+    </div>
+    <script src="{{ url_for('static', path='/JS/evolucao.js') }}?v={{ time }}"></script>
+</body>
+</html>
